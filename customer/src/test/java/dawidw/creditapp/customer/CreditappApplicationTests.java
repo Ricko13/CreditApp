@@ -1,4 +1,4 @@
-package dawidw.creditapp.customer.customer;
+package dawidw.creditapp.customer;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

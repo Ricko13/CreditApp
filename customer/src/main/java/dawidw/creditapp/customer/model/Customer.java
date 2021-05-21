@@ -17,7 +17,6 @@ import java.util.UUID;
 
 @Setter
 @Getter
-//@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -33,7 +32,6 @@ public class Customer {
     @Column(name = "CreditID")
     private UUID creditId;
 
-    @NotNull //todo ta walidacja rzuca 500 zamiast info o walidacji
     @Column(name = "FirstName")
     private String firstName;
 

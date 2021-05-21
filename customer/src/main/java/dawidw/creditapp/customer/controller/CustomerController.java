@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Valid;
 import java.util.List;
 import java.util.UUID;
 
@@ -20,8 +19,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/customers")
 public class CustomerController {
-    //todo controller advice
-    //todo swagger?
+
     private final CustomerService customerService;
 
     @GetMapping("/test")
@@ -30,12 +28,12 @@ public class CustomerController {
     }
 
     @GetMapping
-    public ResponseEntity<List<CustomerDTO>> getCustomersForCreditIds(@RequestParam List<UUID> creditIds) { //todo responsentity?
+    public ResponseEntity<List<CustomerDTO>> getCustomersForCreditIds(@RequestParam List<UUID> creditIds) {
         return ResponseEntity.ok(customerService.getCustomersForCreditIds(creditIds));
     }
 
     @PostMapping
-    public Long createCustomer(@RequestBody CreateCustomerRequest request) { //todo @Valid  prawdopodobnie sprawia, że gdy brakuje pól to rzuca 404 - powinno validation
+    public Long createCustomer(@RequestBody CreateCustomerRequest request) {
         return customerService.createCustomer(request);
     }
 

@@ -5,9 +5,8 @@ import dawidw.creditapp.customer.model.Customer;
 import dawidw.creditapp.customer.model.CustomerDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.ReportingPolicy;
 
-@Mapper(componentModel = "spring") //todo po co component model??
+@Mapper(componentModel = "spring")
 public interface CustomerMapper {
 
     CustomerDTO toDTO(Customer customer);

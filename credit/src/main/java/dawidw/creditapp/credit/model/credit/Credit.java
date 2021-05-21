@@ -16,7 +16,6 @@ import java.util.UUID;
 
 @Setter
 @Getter
-//@AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "Credit")
@@ -27,7 +26,6 @@ public class Credit {
     @Column(name = "Id")
     private Long id;
 
-//    @Id
     @Type(type = "uuid-char")
     @Column(name = "CreditId")
     private UUID creditId = UUID.randomUUID();

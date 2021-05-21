@@ -14,10 +14,6 @@ public interface CustomerValidator {
     @Component
     class CustomerValidatorImpl implements CustomerValidator {
 
-        /*@Override
-        public void valid(@Valid CreateCustomerRequest request) {
-
-        }*/
     }
 
 }

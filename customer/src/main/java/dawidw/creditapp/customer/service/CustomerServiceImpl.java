@@ -24,14 +24,12 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Long createCustomer(CreateCustomerRequest request) {
-        //todo validator instead of @Valid on controller
-        //todo walidacja czy istnieje już dla takiego pesel+creditId > I WTEDY W WALIDATORZE DAJESZ @Valid i gitara
         customerValidator.valid(request);
         return customerRepository.save(customerMapper.toEntity(request)).getId();
     }
 
     @Override
-    public List<CustomerDTO> getCustomersForCreditIds(List<UUID> creditIds) { //todo @NotEmpty
+    public List<CustomerDTO> getCustomersForCreditIds(List<UUID> creditIds) {
         return customerRepository.getCustomersForCreditIds(creditIds).stream()
                 .map(customerMapper::toDTO)
                 .collect(Collectors.toList());

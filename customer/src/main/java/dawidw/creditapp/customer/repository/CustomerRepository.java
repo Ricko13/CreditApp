@@ -15,6 +15,5 @@ public interface CustomerRepository extends CrudRepository<Customer, Long> { //J
 
     @Query("SELECT customer FROM Customer customer WHERE customer.creditId IN :creditIds")
     List<Customer> getCustomersForCreditIds(@Param("creditIds") List<UUID> creditIds);
-    //todo DTO projection?
 
 }

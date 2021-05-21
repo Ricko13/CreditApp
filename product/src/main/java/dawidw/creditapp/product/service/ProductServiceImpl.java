@@ -30,10 +30,6 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<ProductDTO> getProductsForCreditIds(List<UUID> creditIds) {
-        /*Iterable<Product> products = productRepository.findAll();
-        return StreamSupport.stream(products.spliterator(), false)
-                .map(mapper::toDTO)
-                .collect(Collectors.toList());*/
         return productRepository.getCustomersForCreditIds(creditIds).stream()
                 .map(mapper::toDTO)
                 .collect(Collectors.toList());
