@@ -1,0 +1,60 @@
+version: "3.7"
+services:
+    db:
+        image: mysql
+        # image: mysql/mysql-server:latest
+        command: --default-authentication-plugin=mysql_native_password
+        restart: always
+        environment: 
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_ROOT_HOST: "%"
+            MYSQL_USER: "user"
+            MYSQL_PASSWORD: "pass"
+            MYSQL_USER_HOST: "%"
+        ports: 
+            - "3306:3306"
+        volumes:
+            - mysql_db_data_container:/var/lib/mysql
+    # adminer:
+    #     image: adminer
+    #     restart: always
+    #     ports:
+    #         - 8080:8080
+    customer:
+        image: customer:0.0.1-SNAPSHOT
+        restart: always
+        environment: 
+            SPRING_PROFILES_ACTIVE: dev
+            DATA_SOURCE: "jdbc:mysql://creditapp_db_1:3306/customer?createDatabaseIfNotExist=true&autoReconnect=true&useSSL=false"
+        depends_on:
+            - db
+        ports:
+            - "8089:8089"
+    product:
+        image: product:0.0.1-SNAPSHOT
+        restart: always
+        environment: 
+            SPRING_PROFILES_ACTIVE: dev
+            DATA_SOURCE: "jdbc:mysql://creditapp_db_1:3306/product?createDatabaseIfNotExist=true&autoReconnect=true&useSSL=false"
+        depends_on: 
+            - db
+        ports: 
+            - "8090:8090"
+    credit:
+        image: credit:0.0.1-SNAPSHOT
+        restart: always
+        environment: 
+            SPRING_PROFILES_ACTIVE: dev
+            DATA_SOURCE: "jdbc:mysql://creditapp_db_1:3306/credit?createDatabaseIfNotExist=true&autoReconnect=true&useSSL=false"
+            PRODUCT_HOST: product:8090
+            CUSTOMER_HOST: customer:8089
+        depends_on: 
+            - db
+            - customer
+            - product
+        ports: 
+            - "8091:8091"
+        expose:
+            - "8091"
+volumes:
+    mysql_db_data_container:
